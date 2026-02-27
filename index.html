@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Placement des invités</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenue au mariage de</h1>
+    <h2>Chloé & Mayeul</h2>
+    <p class="subtitle">Découvre ta table 🎉</p>
+
+    <input type="text" id="nameInput" placeholder="Ton prénom">
+    <button onclick="spinWheel()">🎡 Lancer la roue</button>
+
+    <div class="wheel-container">
+      <div class="wheel" id="wheel">
+        <span id="result">🌿</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="guests.js"></script>
+  <script>
+    function spinWheel() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const wheel = document.getElementById("wheel");
+      const result = document.getElementById("result");
+
+      if (!guests[name]) {
+        alert("Prénom non trouvé 💌");
+        return;
+      }
+
+      wheel.style.transition = "none";
+      wheel.style.transform = "rotate(0deg)";
+      result.innerHTML = "🌿";
+
+      setTimeout(() => {
+        const rotation = 1440 + Math.floor(Math.random() * 360);
+        wheel.style.transition = "transform 3s ease-out";
+        wheel.style.transform = `rotate(${rotation}deg)`;
+
+        setTimeout(() => {
+          result.innerHTML = `🍽️<br><strong>${guests[name]}</strong>`;
+        }, 2800);
+      }, 100);
+    }
+  </script>
+
+</body>
+</html>
