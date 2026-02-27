@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Placement des invités</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding: 50px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    /* Pétales */
+    #petals {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .petal {
+      position: absolute;
+      top: -50px;
+      background: url('https://i.imgur.com/WRd5T0j.png') no-repeat center/contain;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Pop-up */
+    #popupOverlay {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 1001;
+      max-width: 90%;
+    }
+
+    #popup h2 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      color: #6b4a2a;
+    }
+
+    #popup button {
+      padding: 8px 16px;
+      margin-top: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #8a6b4f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenue au mariage de</h1>
+    <h2>Chloé & Mayeul</h2>
+    <p class="subtitle">Pour plus de fun, le plan de table est tiré au sort ! Découvres vite avec qui tu vas passer la soirée 🌿</p>
+
+    <input type="text" id="nameInput" placeholder="Ton prénom">
+    <button onclick="reveal()">Découvrir ma table 🪻</button>
+  </div>
+
+  <!-- Pétales -->
+  <div id="petals"></div>
+
+  <!-- Pop-up résultat -->
+  <div id="popupOverlay"></div>
+  <div id="popup">
+    <h2>✨ Félicitations ! ✨</h2>
+    <div id="popupText"></div>
+    <button onclick="closePopup()">Fermer</button>
+  </div>
+
+  <script src="guests.js"></script>
+  <script>
+    function reveal() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const petals = document.getElementById("petals");
+      const popup = document.getElementById("popup");
+      const popupOverlay = document.getElementById("popupOverlay");
+      const popupText = document.getElementById("popupText");
+
+      if (!guests[name]) {
+        alert("Prénom non trouvé 💜");
+        return;
+      }
+
+      // Effacer anciens pétales
+      petals.innerHTML = "";
+
+      // Créer pétales
+      for (let i = 0; i < 80; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDelay = Math.random() * 2 + "s";
+        petal.style.animationDuration = 2 + Math.random() * 2 + "s";
+        petal.style.width = 10 + Math.random() * 15 + "px";
+        petal.style.height = 10 + Math.random() * 15 + "px";
+        petals.appendChild(petal);
+
+        // Supprimer pétale après animation
+        petal.addEventListener("animationend", () => petal.remove());
+      }
+
+      // Afficher le résultat après une petite pause pour laisser tomber les pétales
+      setTimeout(() => {
+        popupText.innerHTML = `<strong>${guests[name]}</strong>`;
+        popup.style.display = "block";
+        popupOverlay.style.display = "block";
+      }, 500); // 0.5s de délai pour que l'animation commence
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("popupOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
