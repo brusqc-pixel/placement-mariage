@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Placement des invités</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="veil"></div>
+
+  <div class="container">
+    <h1>Bienvenue au mariage de</h1>
+    <h2>Chloé & Mayeul</h2>
+    <p class="subtitle">Découvre ta table 🌿</p>
+
+    <input type="text" id="nameInput" placeholder="Ton prénom">
+    <button onclick="reveal()">Découvrir ma table</button>
+
+    <div id="petals"></div>
+  </div>
+
+  <!-- Fenêtre pop-up résultat -->
+  <div id="popup" class="popup">
+    <div class="popup-content" id="popupContent"></div>
+    <button onclick="closePopup()" class="close-btn">Fermer</button>
+  </div>
+
+  <script src="guests.js"></script>
+  <script>
+    function reveal() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const petals = document.getElementById("petals");
+      const popupContent = document.getElementById("popupContent");
+      const popup = document.getElementById("popup");
+
+      if (!guests[name]) {
+        alert("Prénom non trouvé 💜");
+        return;
+      }
+
+      // Effacer anciens pétales et pop-up
+      petals.innerHTML = "";
+      popupContent.innerHTML = "";
+
+      // Créer pétales
+      for (let i = 0; i < 50; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDelay = Math.random() * 2 + "s";
+        petal.style.animationDuration = 4 + Math.random() * 3 + "s";
+        petals.appendChild(petal);
+      }
+
+      // Afficher le pop-up après l’animation
+      setTimeout(() => {
+        popupContent.innerHTML = `<strong>${guests[name]}</strong>`;
+        popup.classList.add("show");
+      }, 3500);
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.remove("show");
+    }
+  </script>
+
+</body>
+</html>
