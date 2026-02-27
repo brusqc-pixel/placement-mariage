@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Placement des invités</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <div class="veil"></div>
+
+  <div class="container">
+    <h1>Bienvenue au mariage de</h1>
+    <h2>Chloé & Mayeul</h2>
+    <p class="subtitle">Découvre ta table 🌿</p>
+
+    <input type="text" id="nameInput" placeholder="Ton prénom">
+    <button onclick="reveal()">Découvrir ma table</button>
+
+    <div id="petals"></div>
+  </div>
+
+  <!-- Notification du résultat -->
+  <div id="notification" class="notification">
+    <div id="notificationText"></div>
+  </div>
+
+  <script src="guests.js"></script>
+  <script>
+    function reveal() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const petals = document.getElementById("petals");
+      const notification = document.getElementById("notification");
+      const notificationText = document.getElementById("notificationText");
+
+      if (!guests[name]) {
+        alert("Prénom non trouvé 💜");
+        return;
+      }
+
+      // Effacer anciens pétales et notification
+      petals.innerHTML = "";
+      notification.classList.remove("show");
+      notificationText.innerHTML = "";
+
+      // Créer pétales
+      for (let i = 0; i < 80; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDelay = Math.random() * 2 + "s";
+        petal.style.animationDuration = 2 + Math.random() * 2 + "s";
+        petal.style.width = 10 + Math.random() * 15 + "px";
+        petal.style.height = 10 + Math.random() * 15 + "px";
+        petals.appendChild(petal);
+      }
+
+      // Afficher le résultat dans la notification après animation
+      setTimeout(() => {
+        notificationText.innerHTML = `<strong>${guests[name]}</strong>`;
+        notification.classList.add("show");
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>
