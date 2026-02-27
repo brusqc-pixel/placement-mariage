@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: url("fond-lavande.png") no-repeat center/cover;
+  min-height: 100vh;
+}
+
+.overlay {
+  background: rgba(255,255,255,0.75);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 420px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+h2 {
+  color: #7b5ba7;
+  margin-top: 0;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 15px;
+  padding: 16px;
+  width: 100%;
+  border-radius: 14px;
+  border: none;
+  background: #7b5ba7;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Enveloppe */
+.envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  margin: 40px auto;
+  background: #f3eef8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background: #d8ccea;
+  transform-origin: top;
+  transition: transform 1s ease;
+}
+
+.flap.open {
+  transform: rotateX(180deg);
+}
+
+.letter {
+  position: absolute;
+  bottom: -100%;
+  width: 90%;
+  margin: 0 5%;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  transition: bottom 1s ease;
+  font-size: 20px;
+}
+
+.letter.show {
+  bottom: 15px;
+}
