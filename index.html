@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Découvre ta table</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Bienvenue 💍</h1>
+    <p>Entre ton prénom pour découvrir ta table</p>
+
+    <input type="text" id="nameInput" placeholder="Ton prénom">
+    <button onclick="drawTable()">✨ Tirer ma table ✨</button>
+
+    <div class="card" id="card">
+      <div class="card-inner" id="cardInner">
+        <div class="card-front">🎁</div>
+        <div class="card-back" id="result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="guests.js"></script>
+  <script>
+    function drawTable() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const cardInner = document.getElementById("cardInner");
+      const result = document.getElementById("result");
+
+      if (!guests[name]) {
+        alert("Prénom non trouvé 💌");
+        return;
+      }
+
+      cardInner.classList.remove("flip");
+      result.innerHTML = "";
+
+      setTimeout(() => {
+        result.innerHTML = `🍽️<br><strong>${guests[name]}</strong>`;
+        cardInner.classList.add("flip");
+      }, 800);
+    }
+  </script>
+
+</body>
+</html>
