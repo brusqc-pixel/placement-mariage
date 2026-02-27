@@ -1,0 +1,126 @@
+/* FOND */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: url("fond-lavande.png") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Voile très léger */
+.veil {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.45);
+  z-index: 0;
+}
+
+/* CONTENU */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  margin: auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+h2 {
+  color: #7b5ba7;
+  margin-top: 0;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 15px;
+  padding: 15px;
+  width: 100%;
+  border-radius: 14px;
+  border: none;
+  background: #7b5ba7;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* PÉTALES */
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  width: 20px;
+  height: 20px;
+  background: rgba(183,154,216,0.8);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* POP-UP */
+.popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 5;
+}
+
+.popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #4a2e78;
+  text-align: center;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border-radius: 14px;
+  border: none;
+  background: #7b5ba7;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
