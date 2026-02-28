@@ -47,32 +47,32 @@
       
     }*/
 
-    .petal {
+   .petal {
   position: absolute;
   top: -50px;
+  display: block;
 
-  /* 🎨 Couleur du pétale */
-  background-color: #8e5bbf; /* violet élégant */
+  width: 14px;
+  height: 18px;
 
-  /* 🖤 Image utilisée comme masque */
-  -webkit-mask-image: url('https://i.imgur.com/WRd5T0j.png');
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
+  background: linear-gradient(135deg, #c8a2c8, #8e5bbf);
+  border-radius: 60% 40% 60% 40%;
 
-  mask-image: url('https://i.imgur.com/WRd5T0j.png');
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
+  opacity: 0.9;
 
-  pointer-events: none;
   animation: fall linear forwards;
-    }
+}
 
-    @keyframes fall {
+    /*@keyframes fall {
       to {
         transform: translateY(110vh) rotate(360deg);
       }
+    }*/
+
+    @keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(540deg);
+  }
     }
 
     /* Pop-up */
